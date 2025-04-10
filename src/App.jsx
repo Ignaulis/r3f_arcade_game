@@ -1,13 +1,8 @@
-import DeathRun from "./DeathRun/DeathRun"
+import Game from "./Game/Game";
 
 function App() {
 
-
-  return (
-    <>
-      <DeathRun />
-    </>
-  )
+  return <Game />
 }
 
 export default App

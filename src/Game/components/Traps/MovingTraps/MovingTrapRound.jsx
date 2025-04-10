@@ -1,4 +1,3 @@
-import { RigidBody } from "@react-three/rapier";
 import Blocks from "../../Blocks/Blocks";
 import MovingTrap from "./MovingTrap";
 

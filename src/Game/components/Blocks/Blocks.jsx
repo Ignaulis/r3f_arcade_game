@@ -4,8 +4,6 @@ export default function Blocks({ rotation = [0, 0, 0], position = [0, 0, 0] }) {
 
     return (
         <mesh
-            // rotation={rotation}
-            // position={position}
             {...{rotation, position}}
         >
             <Block position={[0, 0, 0]} />

@@ -40,7 +40,7 @@ export default function MovingTrap({ position = [0, 0, 0], rotation = [0, 0, 0],
                 <mesh >
                     <boxGeometry args={[2.8, 0.4, 0.4]} />
                     <meshBasicMaterial color={'black'} />
-                    <Edges scale={1} color={'cyan'} threshold={2} />
+                    <Edges scale={1} color={'green'} threshold={2} lineWidth={2}/>
                 </mesh>
             </RigidBody>
 

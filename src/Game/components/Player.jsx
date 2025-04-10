@@ -11,33 +11,31 @@ export default function Player() {
     const shipBody = useRef()
     const { camera } = useThree()
 
+    const cameraOffset = new THREE.Vector3(1, 0.8, 4)
+    const cameraLerp = 0.1
+
     useFrame((_, delta) => {
 
         shipRef.current.rotation.y += delta * 2
+        if (shipBody.current) {
 
-        const shipPosition = shipRef.current.position
+            const shipPosition = shipBody.current.translation()
 
-        camera.position.lerp(
-            new THREE.Vector3(
-                shipPosition.x,
-                shipPosition.y + 0.8,
-                shipPosition.z + 3
-            ),
-            0.2
-        )
-        camera.lookAt(shipPosition)
+            const targetCamera = new THREE.Vector3().copy(shipPosition).add(cameraOffset)
+            camera.position.lerp(targetCamera, cameraLerp)
 
-        if(shipBody.current) {
+            camera.lookAt(targetCamera)
+
             const position = shipBody.current.translation()
             position.z -= 0.01
             shipBody.current.setNextKinematicTranslation(position)
         }
-        
+
     })
 
     return (
         <>
-            <RigidBody ref={shipBody} type={'kinematicPosition'}>
+            <RigidBody ref={shipBody} colliders='hull' type={'kinematicPosition'}>
                 <primitive
                     ref={shipRef}
                     object={ship.scene}
@@ -47,7 +45,7 @@ export default function Player() {
             </RigidBody>
             <directionalLight
                 position={[1, 0.7, 2]}
-                intensity={20}
+                intensity={15}
                 color={'cyan'}
             />
         </>
