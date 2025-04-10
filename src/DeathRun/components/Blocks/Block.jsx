@@ -5,7 +5,7 @@ const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 'black' })
 const scale = [1, 0.3, 1]
 
-export default function BlockStart({ position = [0, 0, 0] }) {
+export default function BlockStart({ position = [0, 0, 0], rotation=[0, 0, 0] }) {
 
     return (
         <mesh
@@ -14,6 +14,7 @@ export default function BlockStart({ position = [0, 0, 0] }) {
             receiveShadow
             scale={scale}
             position={position}
+            rotation={rotation}
         >
             <Edges
                 scale={1}
