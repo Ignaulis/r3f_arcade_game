@@ -7,7 +7,7 @@ export default function MovingTrapRound({ position = [0, 0, 0] }) {
     const trapPosition = useMemo(() => Math.random() < 0.5, [])
 
     return (
-        <group
+        <mesh
             position={position}
         >
             {
@@ -26,6 +26,6 @@ export default function MovingTrapRound({ position = [0, 0, 0] }) {
             }
             <Blocks rotation={[0, 0, 0]} position={[0, 2.65, 0]} />
             <Blocks rotation={[0, 0, Math.PI / 2]} position={[2.65, 0, 0]} />
-        </group>
+        </mesh>
     );
 }

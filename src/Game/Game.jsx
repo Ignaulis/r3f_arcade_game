@@ -4,11 +4,12 @@ import Tunell from "./components/Tunell";
 import { Physics } from "@react-three/rapier";
 import Player from "./components/Player";
 import { Perf } from "r3f-perf";
+import { ShipContextProvider } from "./context/GameContext";
 
 export default function Game() {
 
     return (
-        <>
+        <ShipContextProvider>
             <Canvas
                 camera={{
                     position: [1, 1.5, 1],
@@ -25,6 +26,6 @@ export default function Game() {
                     <Player />
                 </Physics>
             </Canvas>
-        </>
+        </ShipContextProvider>
     );
 }

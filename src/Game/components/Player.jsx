@@ -1,9 +1,10 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from 'three'
 import { Controls } from "./Controls";
+import { ShipContext } from "../context/GameContext";
 
 export default function Player() {
 
@@ -13,7 +14,7 @@ export default function Player() {
 
     const ship = useGLTF('./ship/scene.gltf')
     const shipRef = useRef()
-    const shipBody = useRef()
+    const {shipBody} = useContext(ShipContext)
     const { camera } = useThree()
 
     const cameraOffset = new THREE.Vector3(0, 0.8, 4)
@@ -35,7 +36,7 @@ export default function Player() {
                 .add(cameraOffset)
             camera.position.lerp(targetCamera, cameraLerp)
             camera.lookAt(cameraBasePosition)
-
+            
             // controls
             if (controls.ArrowLeft) {
                 position.x -= 0.03
@@ -97,6 +98,7 @@ export default function Player() {
             shipBody.current.setNextKinematicTranslation(position)
         }
     })
+
     return (
         <>
             <RigidBody ref={shipBody} colliders='hull' type={'kinematicPosition'}>

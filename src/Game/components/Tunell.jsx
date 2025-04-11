@@ -3,8 +3,9 @@ import { RigidBody } from "@react-three/rapier";
 import SpikeRound from "./Traps/SpikeTraps/SpikeRound";
 import WallTrapRound from "./Traps/WallTrap/WalltrapRound";
 import MovingTrapRound from "./Traps/MovingTraps/MovingTrapRound";
-import { useState, useRef } from "react";
+import { useState, useContext } from "react";
 import { useFrame } from "@react-three/fiber";
+import { ShipContext } from "../context/GameContext";
 
 export default function Tunell() {
 
@@ -12,39 +13,42 @@ export default function Tunell() {
         { type: "RoundBlock", position: [0, 0, 0] },
         { type: "RoundBlock", position: [0, 0, -3] },
         { type: "RoundBlock", position: [0, 0, -6] },
-        { type: "SpikeRound", position: [0, 0, -9] },
+        { type: "WallTrapRound", position: [0, 0, -9] },
         { type: "WallTrapRound", position: [0, 0, -12] },
-        { type: "MovingTrapRound", position: [0, 0, -15] },
-        { type: "SpikeRound", position: [0, 0, -18] },
-        { type: "WallTrapRound", position: [0, 0, -21] },
-        { type: "MovingTrapRound", position: [0, 0, -24] },
+        { type: "WallTrapRound", position: [0, 0, -15] },
+        { type: "WallTrapRound", position: [0, 0, -18] }
     ]);
 
-    const timer = useRef(0)
+    const { shipBody } = useContext(ShipContext)
 
-    useFrame((_, delta) => {
-        timer.current += delta
+    useFrame(() => {
+        if (shipBody.current) {
 
-        if (timer.current >= 2) {
-            timer.current = 0
-            setComponent((prev) => {
-                const newComponent = ['SpikeRound', 'WallTrapRound', 'MovingTrapRound']
-                const randComponent = newComponent[Math.floor(Math.random() * newComponent.length)]
-                const newZ = prev[prev.length - 1].position[2] - 3
-                return [
-                    ...prev.slice(1),
-                    {
-                        type: randComponent,
-                        position: [0, 0, newZ]
-                    }
-                ]
-            })
+            const shipPosition = shipBody.current.translation()
+            const compLastZPos = component[component.length - 1].position[2]
 
+            if (shipPosition.z <= compLastZPos + 12) {
+                setComponent((prev) => {
+                    const newComponent = ['SpikeRound', 'WallTrapRound', 'MovingTrapRound']
+                    const randComponent = newComponent[Math.floor(Math.random() * newComponent.length)]
+                    const newZ = prev[prev.length - 1].position[2] - 3
+                    return [
+                        ...prev.slice(1),
+                        {
+                            type: randComponent,
+                            position: [0, 0, newZ]
+                        }
+                    ]
+                })
+
+            }
         }
     })
 
     return (
-        <RigidBody type="fixed">
+        <RigidBody
+            gravityScale={0}
+        >
             {
                 component.map((comp) => {
                     const Component = comp.type === 'RoundBlock'
@@ -55,11 +59,10 @@ export default function Tunell() {
                                 ? WallTrapRound
                                 : MovingTrapRound
 
-                    return <Component key={comp.position[2]} position={comp.position} />
+                    return (<Component key={comp.position[2]} position={comp.position} />)
                 })
             }
+
         </RigidBody>
-
-
     );
 }
