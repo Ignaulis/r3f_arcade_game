@@ -25,36 +25,37 @@ export default function Tunell() {
     useFrame((_, delta) => {
         timer.current += delta
 
-        if (timer.current >= 5) {
+        if (timer.current >= 2) {
             timer.current = 0
+            setComponent((prev) => {
+                const newComponent = ['SpikeRound', 'WallTrapRound', 'MovingTrapRound']
+                const randComponent = newComponent[Math.floor(Math.random() * newComponent.length)]
+                const newZ = prev[prev.length - 1].position[2] - 3
+                return [
+                    ...prev.slice(1),
+                    {
+                        type: randComponent,
+                        position: [0, 0, newZ]
+                    }
+                ]
+            })
 
-            const newComponent = ['SpikeRound', 'WallTrapRound', 'MovingTrapRound']
-            const randComponent = newComponent[Math.floor(Math.random() * newComponent.length)]
-            const newZ = component[component.length - 1].position[2] -3
-            setComponent((prev) => [
-                ...prev,
-                {
-                    type: randComponent,
-                    position: [0, 0, newZ]
-                }
-            ])
         }
-
     })
 
     return (
         <RigidBody type="fixed">
             {
-                component.map((comp, index) => {
+                component.map((comp) => {
                     const Component = comp.type === 'RoundBlock'
-                    ? RoundBlock
-                    : comp.type === 'SpikeRound'
-                    ? SpikeRound
-                    : comp.type === 'WallTrapRound'
-                    ? WallTrapRound
-                    : MovingTrapRound
+                        ? RoundBlock
+                        : comp.type === 'SpikeRound'
+                            ? SpikeRound
+                            : comp.type === 'WallTrapRound'
+                                ? WallTrapRound
+                                : MovingTrapRound
 
-                    return <Component key={index} position={comp.position}/>
+                    return <Component key={comp.position[2]} position={comp.position} />
                 })
             }
         </RigidBody>

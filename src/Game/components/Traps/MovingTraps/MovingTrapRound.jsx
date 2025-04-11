@@ -1,9 +1,10 @@
 import Blocks from "../../Blocks/Blocks";
 import MovingTrap from "./MovingTrap";
+import { useMemo } from "react";
 
 export default function MovingTrapRound({ position = [0, 0, 0] }) {
 
-    const trapPosition = Math.random() < 0.5
+    const trapPosition = useMemo(() => Math.random() < 0.5, [])
 
     return (
         <group

@@ -4,7 +4,6 @@ import Tunell from "./components/Tunell";
 import { Physics } from "@react-three/rapier";
 import Player from "./components/Player";
 import { Perf } from "r3f-perf";
-import Controls from "./components/Controls";
 
 export default function Game() {
 
@@ -21,7 +20,6 @@ export default function Game() {
                 <Perf />
                 <color args={['black']} attach={'background'} />
                 {/* <OrbitControls /> */}
-                <Controls />
                 <Physics >
                     <Tunell />
                     <Player />
