@@ -37,6 +37,7 @@ export default function Player() {
             camera.position.lerp(targetCamera, cameraLerp)
             camera.lookAt(cameraBasePosition)
             
+            
             // controls
             if (controls.ArrowLeft) {
                 position.x -= 0.03
@@ -94,14 +95,14 @@ export default function Player() {
                 shipRotate.y += delta * 2
             }
 
-            position.z -= 0.04
+            position.z -= 0.01
             shipBody.current.setNextKinematicTranslation(position)
         }
     })
 
     return (
         <>
-            <RigidBody ref={shipBody} colliders='hull' type={'kinematicPosition'}>
+            <RigidBody ref={shipBody} colliders='hull' type='kinematicPosition'>
                 <primitive
                     ref={shipRef}
                     object={ship.scene}

@@ -1,5 +1,4 @@
 import RoundBlock from "./Blocks/RoundBlock";
-import { RigidBody } from "@react-three/rapier";
 import SpikeRound from "./Traps/SpikeTraps/SpikeRound";
 import WallTrapRound from "./Traps/WallTrap/WalltrapRound";
 import MovingTrapRound from "./Traps/MovingTraps/MovingTrapRound";
@@ -46,9 +45,7 @@ export default function Tunell() {
     })
 
     return (
-        <RigidBody
-            gravityScale={0}
-        >
+        <>
             {
                 component.map((comp) => {
                     const Component = comp.type === 'RoundBlock'
@@ -62,7 +59,6 @@ export default function Tunell() {
                     return (<Component key={comp.position[2]} position={comp.position} />)
                 })
             }
-
-        </RigidBody>
+        </>
     );
 }

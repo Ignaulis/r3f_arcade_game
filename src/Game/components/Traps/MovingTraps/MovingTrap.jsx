@@ -36,6 +36,7 @@ export default function MovingTrap({ position = [0, 0, 0], rotation = [0, 0, 0],
                 position={[1, 0.45, 1]}
                 restitution={0.2}
                 friction={0}
+                colliders='cuboid'
             >
                 <mesh >
                     <boxGeometry args={[2.8, 0.4, 0.4]} />
