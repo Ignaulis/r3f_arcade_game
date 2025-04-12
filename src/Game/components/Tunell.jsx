@@ -26,7 +26,7 @@ export default function Tunell() {
             const shipPosition = shipBody.current.translation()
             const compLastZPos = component[component.length - 1].position[2]
 
-            if (shipPosition.z <= compLastZPos + 12) {
+            if (shipPosition.z <= compLastZPos + 9) {
                 setComponent((prev) => {
                     const newComponent = ['SpikeRound', 'WallTrapRound', 'MovingTrapRound']
                     const randComponent = newComponent[Math.floor(Math.random() * newComponent.length)]

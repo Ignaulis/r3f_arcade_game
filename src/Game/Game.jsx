@@ -21,7 +21,7 @@ export default function Game() {
                 <Perf />
                 <color args={['black']} attach={'background'} />
                 {/* <OrbitControls /> */}
-                <Physics debug>
+                <Physics>
                     <Tunell />
                     <Player />
                 </Physics>
