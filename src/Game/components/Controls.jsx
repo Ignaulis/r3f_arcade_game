@@ -7,7 +7,8 @@ export function Controls() {
         ArrowDown: false,
         ArrowLeft: false,
         ArrowRight: false,
-        Space: false
+        Space: false,
+        KeyR: false
     })
 
     useEffect(() => {
@@ -30,6 +31,11 @@ export function Controls() {
 
         window.addEventListener('keydown', pressedButton)
         window.addEventListener('keyup', letGoButton)
+
+        return () => {
+            window.removeEventListener('keydown', pressedButton);
+            window.removeEventListener('keyup', letGoButton);
+        };
 
     }, [pressed])
 

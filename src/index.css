@@ -22,3 +22,17 @@ body,
   font-size: 6.25rem;
   font-weight: 200;
 }
+
+.start {
+  font-size: 8rem;
+  color: white;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  user-select: none;
+}
+
+.play {
+  cursor: pointer;
+}
+.play:hover {
+  color: orange;
+}

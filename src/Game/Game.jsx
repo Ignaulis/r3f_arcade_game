@@ -8,6 +8,7 @@ import { ShipContextProvider } from "./context/GameContext";
 import GameOver from "./components/GameOver";
 import { Suspense } from "react";
 import Loader from "./components/Loader";
+import GameStart from "./components/GameStart";
 
 export default function Game() {
 
@@ -30,6 +31,7 @@ export default function Game() {
                     <Player />
                 </Physics>
                 <GameOver />
+                <GameStart />
                 </Suspense>
                 
             </Canvas>

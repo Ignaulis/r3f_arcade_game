@@ -6,13 +6,19 @@ export const ShipContextProvider = ({children}) => {
 
     const shipBody = useRef()
     const [gameOver, setGameOver] = useState(false)
+    const [play, setPlay] = useState(false)
+    const [restart, setRestart] = useState(false)
 
     return(
         <ShipContext.Provider
             value={{
                 shipBody,
                 gameOver,
-                setGameOver
+                setGameOver,
+                play,
+                setPlay,
+                restart,
+                setRestart
             }}
         >
             {children}

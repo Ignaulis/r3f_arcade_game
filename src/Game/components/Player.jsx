@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from 'three'
 import { Controls } from "./Controls";
@@ -13,11 +13,10 @@ export default function Player() {
     const controls = Controls()
     const ship = useGLTF('./ship/scene.gltf')
     const shipRef = useRef()
-    const { shipBody, setGameOver } = useContext(ShipContext)
+    const { shipBody, setGameOver, play, setPlay, restart, setRestart } = useContext(ShipContext)
     const { camera } = useThree()
-    const [cameraPosGO, setCameraPosGO] = useState(2)
+    const [cameraPosGO, setCameraPosGO] = useState(4)
     const [gravity, setGravity] = useState(true)
-
 
 
     const cameraOffset = new THREE.Vector3(0, 0.4, cameraPosGO)
@@ -112,10 +111,43 @@ export default function Player() {
         if (e) {
             shipParams.baseSpeed = 0
             setGameOver(true)
-            setCameraPosGO(6)
+            setCameraPosGO(4)
             setGravity(true)
         }
     }
+
+    useEffect(() => {
+        if (controls.KeyR) {
+            setRestart(true)
+        }
+    }, [controls.KeyR, setRestart])
+
+    useEffect(() => {
+        if (play) {
+            setCameraPosGO(2)
+            setRestart(false)
+            setPlay(false)
+            setTimeout(() => {
+                setGravity(false)
+                shipParams.baseSpeed = 4
+            }, 1000)
+        }
+    }, [play, setRestart, setPlay])
+
+    useEffect(() => {
+        if (restart && shipBody.current) {
+            setCameraPosGO(4)
+            setGravity(true)
+            setGameOver(false)
+            shipBody.current.setTranslation({ x: 0, y: 1.45, z: 1 }, true)
+
+            setTimeout(() => {
+                setPlay(false)
+            }, 500)
+        }
+
+    }, [restart, setPlay, shipBody, setGameOver])
+
 
     return (
         <>

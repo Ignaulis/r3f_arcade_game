@@ -2,13 +2,13 @@ import RoundBlock from "./Blocks/RoundBlock";
 import SpikeRound from "./Traps/SpikeTraps/SpikeRound";
 import WallTrapRound from "./Traps/WallTrap/WalltrapRound";
 import MovingTrapRound from "./Traps/MovingTraps/MovingTrapRound";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { ShipContext } from "../context/GameContext";
 
 export default function Tunell() {
 
-    const [component, setComponent] = useState([
+    const initialComponents = [
         { type: "RoundBlock", position: [0, 0, 0] },
         { type: "RoundBlock", position: [0, 0, -3] },
         { type: "RoundBlock", position: [0, 0, -6] },
@@ -16,9 +16,17 @@ export default function Tunell() {
         { type: "WallTrapRound", position: [0, 0, -12] },
         { type: "WallTrapRound", position: [0, 0, -15] },
         { type: "WallTrapRound", position: [0, 0, -18] }
-    ]);
+    ]
 
-    const { shipBody } = useContext(ShipContext)
+    const [component, setComponent] = useState(initialComponents);
+
+    const { shipBody, restart } = useContext(ShipContext)
+
+    useEffect(() => {
+        if(restart) {
+            setComponent(initialComponents)
+        }
+    },[restart])
 
     useFrame(() => {
         if (shipBody.current) {
