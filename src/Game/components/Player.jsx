@@ -5,6 +5,7 @@ import { RigidBody } from "@react-three/rapier";
 import * as THREE from 'three'
 import { Controls } from "./Controls";
 import { ShipContext } from "../context/GameContext";
+import { shipParams } from "./Logic";
 
 export default function Player() {
 
@@ -12,15 +13,15 @@ export default function Player() {
     const controls = Controls()
     const ship = useGLTF('./ship/scene.gltf')
     const shipRef = useRef()
-    const { shipBody } = useContext(ShipContext)
+    const { shipBody, setGameOver } = useContext(ShipContext)
     const { camera } = useThree()
+    const [cameraPosGO, setCameraPosGO] = useState(2)
+    const [gravity, setGravity] = useState(true)
 
-    const cameraOffset = new THREE.Vector3(0, 0.4, 2)
+
+
+    const cameraOffset = new THREE.Vector3(0, 0.4, cameraPosGO)
     const cameraLerp = 0.1
-
-    const baseSpeed = 3
-    const boostSpeed = 6
-    const straveSpeed = 1
 
     useFrame((_, delta) => {
 
@@ -39,11 +40,11 @@ export default function Player() {
             camera.position.lerp(targetCamera, cameraLerp)
             camera.lookAt(cameraBasePosition)
 
-            const velocity = new THREE.Vector3(0, 0, -baseSpeed)
+            const velocity = new THREE.Vector3(0, 0, -shipParams.baseSpeed)
 
             // controls
             if (controls.ArrowLeft) {
-                velocity.x -= straveSpeed
+                velocity.x -= shipParams.straveSpeed
 
                 if (shipRotate.z < 0.2) {
                     shipRotate.z += 0.01
@@ -51,7 +52,7 @@ export default function Player() {
 
                 shipRotate.y = 0
             } else if (controls.ArrowRight) {
-                velocity.x += straveSpeed
+                velocity.x += shipParams.straveSpeed
                 if (shipRotate.z > -0.2) {
                     shipRotate.z -= 0.01
                 }
@@ -67,14 +68,14 @@ export default function Player() {
             }
 
             if (controls.ArrowUp) {
-                velocity.y += straveSpeed
+                velocity.y += shipParams.straveSpeed
 
                 if (shipRotate.x < 0.2) {
                     shipRotate.x += 0.02
 
                 }
             } else if (controls.ArrowDown) {
-                velocity.y -= straveSpeed
+                velocity.y -= shipParams.straveSpeed
 
                 if (shipRotate.x > -0.2) {
                     shipRotate.x -= 0.02
@@ -89,7 +90,7 @@ export default function Player() {
             }
 
             if (controls.Space) {
-                velocity.z -= boostSpeed
+                velocity.z -= shipParams.boostSpeed
                 setColor('crimson')
                 shipRotate.y += delta * 4
             } else {
@@ -107,12 +108,13 @@ export default function Player() {
         }
     })
 
-    const handleCollision = (e) => {
-        if(e) {
-            console.log('veik');
-            
+    const onCollision = e => {
+        if (e) {
+            shipParams.baseSpeed = 0
+            setGameOver(true)
+            setCameraPosGO(6)
+            setGravity(true)
         }
-
     }
 
     return (
@@ -122,16 +124,17 @@ export default function Player() {
                 colliders='hull'
                 type='dynamic'
                 mass={1}
+                gravityScale={gravity ? 0 : 1}
                 linearDamping={0.1}
                 angularDamping={0.1}
                 position={[0, 1.45, 1]}
-                onCollisionEnter={handleCollision}
+                onCollisionEnter={onCollision}
             >
                 <primitive
                     ref={shipRef}
                     object={ship.scene}
                     scale={0.08}
-                position={[1, 0, 0]}
+                    position={[1, 0, 0]}
                 />
             </RigidBody>
             <directionalLight

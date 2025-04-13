@@ -5,6 +5,9 @@ import { Physics } from "@react-three/rapier";
 import Player from "./components/Player";
 import { Perf } from "r3f-perf";
 import { ShipContextProvider } from "./context/GameContext";
+import GameOver from "./components/GameOver";
+import { Suspense } from "react";
+import Loader from "./components/Loader";
 
 export default function Game() {
 
@@ -18,13 +21,17 @@ export default function Game() {
                     far: 50
                 }}
             >
-                <Perf />
+                <Suspense fallback={<Loader />}>
+                    <Perf />
                 <color args={['black']} attach={'background'} />
                 {/* <OrbitControls /> */}
                 <Physics>
                     <Tunell />
                     <Player />
                 </Physics>
+                <GameOver />
+                </Suspense>
+                
             </Canvas>
         </ShipContextProvider>
     );
