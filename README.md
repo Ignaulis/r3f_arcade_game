@@ -10,7 +10,7 @@ Alien Trap Run is a 3D game built with React and Three.js libraries. In this gam
 - [Technologies](#technologies)
 - [Controls](#controls)
 - [Getting Started](#getting-started)
-- [Future Improvements](#future-improvements)
+- [Where To Improve](#Where-To-Improve)
 - [License](#license)
 
 ## Overview
@@ -88,10 +88,10 @@ yarn start
    
 Open your browser to http://localhost:3000 to play the game.
 
-## Future Improvements
+## Where To Improve
 
-- **Enhanced Visual Effects:** Further improvements in lighting, particle effects, and textures.
-- **Sound and Music:** Introduction of engaging soundtracks and sound effects.
+- **Enhanced Visual Effects:** Like lighting, particle effects, and textures.
+- **Sound and Music:** Engaging of soundtracks and sound effects.
 - **Leaderboard Integration:** Adding online leaderboards for global competition.
 - **Additional Power-ups:** Diversifying gameplay with new power-ups and obstacles.
 - **Performance Optimization:** Improve overall game performance for smoother and more responsive gameplay.
