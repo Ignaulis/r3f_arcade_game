@@ -146,7 +146,7 @@ export default function Player() {
             setAlert(false)
             setTimeout(() => {
                 setGravity(false)
-                shipParams.baseSpeed = 5
+                shipParams.baseSpeed = 6;
             }, 1000)
         }
     }, [play, setRestart, setPlay])

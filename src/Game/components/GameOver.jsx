@@ -5,7 +5,7 @@ import { Html } from "@react-three/drei";
 
 export default function GameOver() {
 
-    const { shipBody, gameOver } = useContext(ShipContext)
+    const { shipBody, gameOver, isMobile } = useContext(ShipContext)
     const [positionZ, setPositionZ] = useState(0)
     const [positionY, setPositionY] = useState(0)
 
@@ -22,12 +22,20 @@ export default function GameOver() {
             {
                 gameOver &&
                 <Html
-                    distanceFactor={2.2}
-                    position={[0, positionY, positionZ]}
+                    distanceFactor={isMobile ? 3 : 2.2}
+                    position={[isMobile ? 1 : 0, positionY, isMobile ? positionZ - 5 : positionZ]}
                     wrapperClass="go"
                 >
-                    <div>Game Over</div>
-                    <div className="go-space">Press R to restart</div>
+                    {
+                        isMobile ?
+                            <div>Game Over</div>
+                            :
+                            <>
+                                <div>Game Over</div>
+                                <div className="go-space">Press R to restart</div>
+
+                            </>
+                    }
 
                 </Html>
             }

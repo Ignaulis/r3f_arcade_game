@@ -23,10 +23,10 @@ export default function Tunell() {
     const { shipBody, restart } = useContext(ShipContext)
 
     useEffect(() => {
-        if(restart) {
+        if (restart) {
             setComponent(initialComponents)
         }
-    },[restart])
+    }, [restart])
 
     useFrame(() => {
         if (shipBody.current) {

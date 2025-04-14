@@ -1,22 +1,27 @@
-import { Html, useProgress } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 export default function Loader() {
 
-    const { progress } = useProgress()
-
     return (
-        <Html>
+        <Html fullscreen>
             <div style={{
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: 'black',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 color: 'white',
-                fontSize: '1.5rem',
-                textAlign: 'center',
                 fontFamily: 'sans-serif',
-                background: 'rgba(0,0,0,0.8)',
-                padding: '1em 2em',
-                borderRadius: '10px'
             }}>
-                Loading...<br />
-                {progress.toFixed(0)}%
+                <div style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    padding: '1em 2em',
+                    borderRadius: '10px',
+                    fontSize: '3rem'
+                }}>
+                    Loading...
+                </div>
             </div>
         </Html>
     );

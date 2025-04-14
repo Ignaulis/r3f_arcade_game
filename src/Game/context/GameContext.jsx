@@ -1,8 +1,8 @@
-import {createContext, useRef, useState } from "react";
+import { createContext, useRef, useState } from "react";
 
 export const ShipContext = createContext()
 
-export const ShipContextProvider = ({children}) => {
+export const ShipContextProvider = ({ children }) => {
 
     const shipBody = useRef()
     const [gameOver, setGameOver] = useState(false)
@@ -16,7 +16,9 @@ export const ShipContextProvider = ({children}) => {
     const [active, setActive] = useState(true)
     const [about, setAbout] = useState(false)
 
-    return(
+    const isMobile = innerWidth <= 786;
+
+    return (
         <ShipContext.Provider
             value={{
                 shipBody,
@@ -38,7 +40,8 @@ export const ShipContextProvider = ({children}) => {
                 active,
                 setActive,
                 about,
-                setAbout
+                setAbout,
+                isMobile
             }}
         >
             {children}

@@ -1,5 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import Tunell from "./components/Tunell";
 import { Physics } from "@react-three/rapier";
 import Player from "./components/Player";
@@ -11,6 +10,7 @@ import Loader from "./components/Loader";
 import GameStart from "./components/GameStart";
 import Points from "./components/Points";
 import About from "./components/About";
+import MobileKeys from "./components/MobileKeys";
 
 export default function Game() {
 
@@ -25,21 +25,21 @@ export default function Game() {
                 }}
             >
                 <Suspense fallback={<Loader />}>
-                    <Perf />
-                <color args={['black']} attach={'background'} />
-                {/* <OrbitControls /> */}
-                <Physics>
-                    <Tunell />
-                    <Player />
-                </Physics>
-                <GameOver />
-                <GameStart />
+                    {/* <Perf /> */}
+                    <color args={['black']} attach={'background'} />
+                    <Physics>
+                        <Tunell />
+                        <Player />
+                    </Physics>
+                    <GameOver />
+                    <GameStart />
                 </Suspense>
-                
+
             </Canvas>
             <Points />
             <About />
-            
+            <MobileKeys />
+
         </ShipContextProvider>
     );
 }

@@ -6,13 +6,13 @@ import { useFrame } from "@react-three/fiber";
 
 export default function GameStart() {
 
-    const { setPlay, play, active, setActive, setAbout } = useContext(ShipContext)
+    const { setPlay, play, active, setActive, setAbout, isMobile } = useContext(ShipContext)
     const controls = Controls()
 
     const pressedRef = useRef(false);
 
     useFrame(() => {
-        if(play) return
+        if (play) return
         if ((controls.ArrowUp || controls.ArrowDown) && !pressedRef.current) {
             setActive(prev => !prev);
             pressedRef.current = true;
@@ -24,7 +24,7 @@ export default function GameStart() {
     });
 
     useEffect(() => {
-        if(play) {
+        if (play) {
             setAbout(false)
             return
         }
@@ -44,7 +44,7 @@ export default function GameStart() {
                     rotationIntensity={0.3}
                 >
                     <Html
-                        position={[1.5, 1, -1]}
+                        position={[isMobile ? 0 : 1.5, 1, -1]}
                         distanceFactor={3}
                         wrapperClass="start"
                     >
