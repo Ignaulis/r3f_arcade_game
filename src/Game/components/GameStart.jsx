@@ -6,10 +6,13 @@ import { useFrame } from "@react-three/fiber";
 
 export default function GameStart() {
 
-    const { setPlay, play, active, setActive, setAbout, isMobile } = useContext(ShipContext)
+    const { setPlay, play, active, setActive, setAbout, isMobile, about } = useContext(ShipContext)
     const controls = Controls()
 
     const pressedRef = useRef(false);
+
+    console.log(about);
+    
 
     useFrame(() => {
         if (play) return
@@ -31,7 +34,7 @@ export default function GameStart() {
         if (controls.Space && active) {
             setPlay(true)
         } else if (controls.Space && !active) {
-            setAbout(true)
+            setAbout(prev => !prev)
         }
     }, [active, controls.Space, setPlay, setAbout, play])
 
@@ -49,7 +52,7 @@ export default function GameStart() {
                         wrapperClass="start"
                     >
                         <div className={active ? 'play active' : 'play'} onClick={() => setPlay(true)}>Play</div>
-                        <div className={active ? "hiscores" : 'hiscores active'} onClick={() => setAbout(true)}>About Game</div>
+                        <div className={active ? "hiscores" : 'hiscores active'} onClick={() => setAbout(prev => !prev)}>{about ? 'Close' : 'About Game'}</div>
                     </Html>
                 </Float>
             }

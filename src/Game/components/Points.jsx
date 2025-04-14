@@ -4,7 +4,7 @@ import { ShipContext } from "../context/GameContext";
 
 export default function Points() {
 
-    const { points, setPoints, scoreRef, showPoints, hiscore, setHiscore, alert, setAlert, isMobile, gameOver } = useContext(ShipContext)
+    const { points, setPoints, scoreRef, showPoints, hiscore, setHiscore, alert, setAlert, isMobile, gameOver, about } = useContext(ShipContext)
 
     useEffect(() => {
         const currentPoints = Math.floor(scoreRef.current)
@@ -32,7 +32,7 @@ export default function Points() {
     return (
         <>
             {
-                showPoints && (
+                showPoints && !about && (
 
                     <div className="pointsGap">
                         <div

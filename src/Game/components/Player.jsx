@@ -19,9 +19,10 @@ export default function Player() {
     const [cameraPosGO, setCameraPosGO] = useState(4)
     const [gravity, setGravity] = useState(true)
     const [freze, setFreze] = useState(false)
+    const [cameraStart, setCameraStart] = useState(8)
 
 
-    const cameraOffset = new THREE.Vector3(0, 0.4, cameraPosGO)
+    const cameraOffset = new THREE.Vector3(cameraStart, 0.4, cameraPosGO)
     const cameraLerp = 0.1
 
     useFrame((_, delta) => {
@@ -144,10 +145,11 @@ export default function Player() {
             setPlay(true)
             setShowPoints(false)
             setAlert(false)
+            setCameraStart(0)
             setTimeout(() => {
                 setGravity(false)
                 shipParams.baseSpeed = 6;
-            }, 1000)
+            }, 2000)
         }
     }, [play, setRestart, setPlay])
 
