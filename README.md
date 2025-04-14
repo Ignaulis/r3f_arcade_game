@@ -1,4 +1,4 @@
-# Alien Trap Run #[CLICK AND PLAY NOW!](https://ignaulis.github.io/r3f_game__alien_trap_run/)
+# Alien Trap Run 🎮[CLICK AND PLAY NOW!](https://ignaulis.github.io/r3f_game__alien_trap_run/)
 
 Alien Trap Run is a 3D game built with React and Three.js libraries. In this game, you pilot an alien spacecraft through a tunnel filled with randomly generated spikes. Avoid collisions and travel as far as possible to rack up points—the farther you go, the higher your score. All scores are saved locally so you can continuously challenge your best performance.
 
