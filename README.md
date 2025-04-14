@@ -65,20 +65,20 @@ This game is built with the following libraries and frameworks:
 
 1. **Clone the repository:**
 
-   ```
-   git clone https://github.com/yourusername/alien-ship-tunnel-runner.git
-   cd alien-ship-tunnel-runner
-   ```
+```
+  git clone https://github.com/yourusername/alien-ship-tunnel-runner.git
+  cd alien-ship-tunnel-runner
+```
 2. **Install dependencies:**
 
-  ```
+```
 npm install
 # or
 yarn install
 ```
 3. **Start the development server:**
 
-  ```
+```
 npm start
 # or
 yarn start
@@ -96,3 +96,6 @@ Open your browser to http://localhost:3000 to play the game.
 - **Additional Power-ups:** Diversifying gameplay with new power-ups and obstacles.
 - **Performance Optimization:** Improve overall game performance for smoother and more responsive gameplay.
 - **Mobile Optimization:** Enhance and fine-tune the experience specifically for mobile devices.
+
+## License
+This project is licensed under the MIT License.
