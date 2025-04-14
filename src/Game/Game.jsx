@@ -9,6 +9,8 @@ import GameOver from "./components/GameOver";
 import { Suspense } from "react";
 import Loader from "./components/Loader";
 import GameStart from "./components/GameStart";
+import Points from "./components/Points";
+import About from "./components/About";
 
 export default function Game() {
 
@@ -35,6 +37,9 @@ export default function Game() {
                 </Suspense>
                 
             </Canvas>
+            <Points />
+            <About />
+            
         </ShipContextProvider>
     );
 }

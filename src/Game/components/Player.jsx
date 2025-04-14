@@ -9,20 +9,24 @@ import { shipParams } from "./Logic";
 
 export default function Player() {
 
+
     const [color, setColor] = useState('cyan')
     const controls = Controls()
     const ship = useGLTF('./ship/scene.gltf')
     const shipRef = useRef()
-    const { shipBody, setGameOver, play, setPlay, restart, setRestart } = useContext(ShipContext)
+    const { shipBody, setGameOver, play, setPlay, restart, setRestart, scoreRef, setShowPoints, setAlert } = useContext(ShipContext)
     const { camera } = useThree()
     const [cameraPosGO, setCameraPosGO] = useState(4)
     const [gravity, setGravity] = useState(true)
+    const [freze, setFreze] = useState(false)
 
 
     const cameraOffset = new THREE.Vector3(0, 0.4, cameraPosGO)
     const cameraLerp = 0.1
 
     useFrame((_, delta) => {
+
+        if (freze) return
 
         const shipRotate = shipRef.current.rotation
         shipRotate.y += delta * 2
@@ -104,42 +108,62 @@ export default function Player() {
             },
                 true
             )
+
+            //points
+            scoreRef.current = -position.z + 1
+
         }
     })
 
+    // collision
     const onCollision = e => {
-        if (e) {
+        if (e && shipBody.current) {
             shipParams.baseSpeed = 0
             setGameOver(true)
             setCameraPosGO(4)
             setGravity(true)
+            setFreze(true)
+            setShowPoints(true)
+            shipBody.current.setLinvel({ x: 0, y: 0, z: 0 }, true)
+            shipBody.current.setAngvel({ x: 0, y: 0, z: 0 }, true)
         }
     }
 
+    //restart key
     useEffect(() => {
         if (controls.KeyR) {
             setRestart(true)
         }
     }, [controls.KeyR, setRestart])
 
+    //PLAY
     useEffect(() => {
         if (play) {
             setCameraPosGO(2)
             setRestart(false)
-            setPlay(false)
+            setPlay(true)
+            setShowPoints(false)
+            setAlert(false)
             setTimeout(() => {
                 setGravity(false)
-                shipParams.baseSpeed = 4
+                shipParams.baseSpeed = 5
             }, 1000)
         }
     }, [play, setRestart, setPlay])
 
+    //RESTART
     useEffect(() => {
         if (restart && shipBody.current) {
             setCameraPosGO(4)
             setGravity(true)
             setGameOver(false)
+            setPlay(false)
             shipBody.current.setTranslation({ x: 0, y: 1.45, z: 1 }, true)
+            shipBody.current.setRotation({ x: 0, y: 0, z: 0, w: 1 }, true)
+            shipBody.current.setLinvel({ x: 0, y: 0, z: 0 }, true)
+            shipBody.current.setAngvel({ x: 0, y: 0, z: 0 }, true)
+            shipRef.current.rotation.set(0, 0, 0)
+            setFreze(false)
 
             setTimeout(() => {
                 setPlay(false)

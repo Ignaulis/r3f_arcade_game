@@ -26,13 +26,76 @@ body,
 .start {
   font-size: 8rem;
   color: white;
+  width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   user-select: none;
 }
 
-.play {
+.play,
+.hiscores {
   cursor: pointer;
 }
-.play:hover {
+.play.active,
+.hiscores.active {
   color: orange;
+}
+
+.points {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: 200;
+  color: white;
+  width: 20%;
+  height: 20%;
+}
+.rules {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  top: 25%;
+  left: 0;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: 200;
+  color: white;
+  width: 20%;
+  height: 20%;
+}
+
+.rules p {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color: white;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  
 }
