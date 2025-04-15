@@ -119,6 +119,7 @@ body,
   background-color: rgba(141, 139, 139, 0.8);
   color: black;
   margin-left: 20px;
+  overflow: scroll;
 }
 
 

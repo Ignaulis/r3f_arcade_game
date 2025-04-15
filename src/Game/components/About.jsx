@@ -3,14 +3,14 @@ import { ShipContext } from "../context/GameContext";
 
 export default function About() {
 
-    const { about } = useContext(ShipContext)
+    const { about, isMobile } = useContext(ShipContext)
 
     return (
         <>
             {
                 about &&
-                <div className="about">
-                    <div className="about-con">
+                <div className="about" style={isMobile ? {alignItems: 'start', marginTop: '10px'} : null}>
+                    <div className="about-con" style={isMobile ? {height: '40%'} : null}>
                         <h2>🚀 About the Game: Alien Trap Run</h2>
                         <span>Alien Tunnel Run is a fast-paced 3D arcade game built with React Three Fiber, where you pilot an alien spaceship through an endless tunnel filled with randomly generated traps and obstacles.</span>
                         <span>Your mission: Dodge the traps and travel as far as possible without crashing. The further you go, the higher your score.</span>
