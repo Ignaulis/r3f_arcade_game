@@ -6,15 +6,15 @@ Alien Trap Run is a 3D game built with React and Three.js libraries. In this gam
 
 ## 📑 Table of Contents
 
-- [Overview](#overview)
-- [Preview](#preview)
-- [Features](#features)
-- [Gameplay](#gameplay)
-- [Technologies](#technologies)
-- [Controls](#controls)
-- [Getting Started](#getting-started)
-- [Where To Improve](#Where-To-Improve)
-- [License](#license)
+- [Overview](#-overview)
+- [Preview](#-preview)
+- [Features](#-features)
+- [Gameplay](#-gameplay)
+- [Technologies](#-technologies)
+- [Controls](#-controls)
+- [Getting Started](#-getting-started)
+- [Where To Improve](#-Where-To-Improve)
+- [License](#-license)
 
 ## 🧠 Overview
 
