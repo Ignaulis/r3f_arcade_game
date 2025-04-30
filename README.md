@@ -74,8 +74,8 @@ This game is built with the following libraries and frameworks:
 1. **Clone the repository:**
 
 ```
-  git clone https://github.com/yourusername/alien-ship-tunnel-runner.git
-  cd alien-ship-tunnel-runner
+  git clone https://github.com/Ignaulis/r3f_game__alien_trap_run.git
+  cd alien-trap-run
 ```
 2. **Install dependencies:**
 
